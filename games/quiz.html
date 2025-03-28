@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Python Quiz - DeCode</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
+    <link rel="stylesheet" href="../style.css">
+    <style>
+        .feedback-section {
+            margin-top: 20px;
+            padding: 20px;
+            border-radius: 8px;
+            background-color: #1a1a1a;
+        }
+    </style>
+</head>
+<body class="bg-black text-white">
+    <header class="fixed w-full top-0 z-50 bg-black border-b-4 border-red-600">
+        <nav class="container mx-auto px-4 py-4 flex justify-between items-center">
+            <a href="../index.html" class="text-3xl font-bold text-red-600 tracking-wider">
+                <span class="border-4 border-red-600 px-2 py-1">De</span>
+                <span class="bg-red-600 px-2 py-1">Code</span>
+            </a>
+            <button id="menu-toggle" class="md:hidden text-2xl">
+                <i class="fas fa-bars"></i>
+            </button>
+            <ul class="hidden md:flex space-x-8 text-lg">
+                <li><a href="../index.html" class="hover:text-red-600 transition-colors">Home</a></li>
+                <li><a href="truefalse.html" class="hover:text-red-600 transition-colors">True/False</a></li>
+                <li><a href="quiz.html" class="text-red-600">Quiz</a></li>
+            </ul>
+        </nav>
+        <div id="mobile-menu" class="hidden md:hidden bg-black border-t-2 border-red-600">
+            <ul class="px-4 py-2">
+                <li class="py-2"><a href="../index.html" class="block hover:text-red-600 transition-colors">Home</a></li>
+                <li class="py-2"><a href="truefalse.html" class="block hover:text-red-600 transition-colors">True/False</a></li>
+                <li class="py-2"><a href="quiz.html" class="block text-red-600">Quiz</a></li>
+            </ul>
+        </div>
+    </header>
+
+    <main class="pt-24 min-h-screen">
+        <div class="container mx-auto px-4">
+            <!-- Game Setup Section -->
+            <div id="game-setup" class="text-center mb-12">
+                <h1 class="text-4xl font-bold mb-8 glitch-text">Python Quiz Challenge</h1>
+                <p class="text-xl mb-8">Test your Python knowledge with multiple-choice questions!</p>
+                
+                <div class="max-w-md mx-auto">
+                    <h2 class="text-2xl mb-4">Select Difficulty</h2>
+                    <div class="grid grid-cols-3 gap-4 mb-8">
+                        <button class="difficulty-btn py-3 px-4 border-2 border-red-600 hover:bg-red-600 transition-colors" data-difficulty="easy">Easy</button>
+                        <button class="difficulty-btn py-3 px-4 border-2 border-red-600 hover:bg-red-600 transition-colors" data-difficulty="medium">Medium</button>
+                        <button class="difficulty-btn py-3 px-4 border-2 border-red-600 hover:bg-red-600 transition-colors" data-difficulty="hard">Hard</button>
+                    </div>
+                    <button id="start-game" class="bg-red-600 text-white px-8 py-3 text-lg font-bold hover:bg-red-700 transition-colors transform hover:scale-105 w-full">
+                        Start Quiz
+                    </button>
+                </div>
+            </div>
+
+            <!-- Quiz Area (Hidden initially) -->
+            <div id="quiz-area" class="max-w-2xl mx-auto hidden">
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                    <div class="flex justify-between items-center mb-2">
+                        <span class="text-lg">Progress</span>
+                        <span class="text-lg"><span id="question-number">1</span>/<span id="total-questions">10</span></span>
+                    </div>
+                    <div class="w-full bg-gray-700 rounded-full h-4">
+                        <div id="progress-bar" class="bg-red-600 h-4 rounded-full transition-all duration-300" style="width: 10%"></div>
+                    </div>
+                </div>
+
+                <!-- Score Display -->
+                <div class="text-right mb-4">
+                    <span class="text-xl">Score: <span id="score">0</span></span>
+                </div>
+
+                <!-- Question Display -->
+                <div class="bg-gray-900 p-6 rounded-lg mb-8 border-2 border-red-600">
+                    <p id="question-text" class="text-xl mb-8 font-mono"></p>
+                    
+                    <!-- Answer Options -->
+                    <div class="grid grid-cols-1 gap-4" id="options-container">
+                        <!-- Options will be inserted here by JavaScript -->
+                    </div>
+                </div>
+
+                <!-- Feedback Area -->
+                <div id="feedback" class="feedback-section hidden">
+                    <p id="feedback-text" class="text-xl mb-4 text-center"></p>
+                    <div id="explanation" class="bg-gray-800 p-4 rounded-lg mb-4"></div>
+                    <div class="text-center">
+                        <button id="next-question" class="bg-red-600 text-white px-6 py-2 text-lg hover:bg-red-700 transition-colors rounded-lg">
+                            Next Question
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Game Over Screen (Hidden initially) -->
+            <div id="game-over" class="text-center hidden">
+                <h2 class="text-4xl font-bold mb-6 glitch-text">Quiz Complete!</h2>
+                <p class="text-2xl mb-4">Final Score: <span id="final-score">0</span></p>
+                <p id="performance-message" class="text-xl mb-8"></p>
+                <div class="space-x-4">
+                    <button id="play-again" class="bg-red-600 text-white px-8 py-3 text-lg font-bold hover:bg-red-700 transition-colors rounded-lg">
+                        Play Again
+                    </button>
+                    <a href="../index.html" class="inline-block bg-gray-600 text-white px-8 py-3 text-lg font-bold hover:bg-gray-700 transition-colors rounded-lg">
+                        Back to Home
+                    </a>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <footer class="bg-black border-t-4 border-red-600 py-8 mt-12">
+        <div class="container mx-auto px-4 text-center">
+            <p class="text-gray-400">© 2024 DeCode. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="../script.js"></script>
+    <script src="quiz.js"></script>
+</body>
+</html>
