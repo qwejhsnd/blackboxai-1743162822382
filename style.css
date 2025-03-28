@@ -1,0 +1,161 @@
+/* Custom Properties */
+:root {
+    --primary-color: #FF0000;
+    --secondary-color: #000000;
+    --text-color: #FFFFFF;
+}
+
+/* Global Styles */
+body {
+    font-family: 'Space Mono', monospace;
+    background-color: var(--secondary-color);
+    color: var(--text-color);
+    line-height: 1.6;
+}
+
+/* Glitch Text Effect */
+.glitch-text {
+    position: relative;
+    text-shadow: 0.05em 0 0 #ff0000,
+                -0.025em -0.05em 0 #0000ff,
+                0.025em 0.05em 0 #00ff00;
+    animation: glitch 500ms infinite;
+}
+
+@keyframes glitch {
+    0% {
+        text-shadow: 0.05em 0 0 #ff0000,
+                    -0.025em -0.05em 0 #0000ff,
+                    0.025em 0.05em 0 #00ff00;
+    }
+    14% {
+        text-shadow: 0.05em 0 0 #ff0000,
+                    -0.025em -0.05em 0 #0000ff,
+                    0.025em 0.05em 0 #00ff00;
+    }
+    15% {
+        text-shadow: -0.05em -0.025em 0 #ff0000,
+                    0.025em 0.025em 0 #0000ff,
+                    -0.05em -0.05em 0 #00ff00;
+    }
+    49% {
+        text-shadow: -0.05em -0.025em 0 #ff0000,
+                    0.025em 0.025em 0 #0000ff,
+                    -0.05em -0.05em 0 #00ff00;
+    }
+    50% {
+        text-shadow: 0.025em 0.05em 0 #ff0000,
+                    0.05em 0 0 #0000ff,
+                    0 -0.05em 0 #00ff00;
+    }
+    99% {
+        text-shadow: 0.025em 0.05em 0 #ff0000,
+                    0.05em 0 0 #0000ff,
+                    0 -0.05em 0 #00ff00;
+    }
+    100% {
+        text-shadow: -0.025em 0 0 #ff0000,
+                    -0.025em -0.025em 0 #0000ff,
+                    -0.025em -0.05em 0 #00ff00;
+    }
+}
+
+/* Game Cards */
+.game-card {
+    background-color: rgba(255, 0, 0, 0.1);
+    transition: all 0.3s ease;
+}
+
+.game-card:hover {
+    background-color: rgba(255, 0, 0, 0.2);
+}
+
+/* Difficulty Badges */
+.difficulty-badge {
+    padding: 0.25rem 0.75rem;
+    border: 2px solid var(--primary-color);
+    border-radius: 4px;
+    font-size: 0.875rem;
+    color: var(--primary-color);
+}
+
+/* Button Hover Effects */
+.hover\:transform:hover {
+    transform: scale(1.05);
+}
+
+/* Mobile Menu Animation */
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+        opacity: 0;
+    }
+    to {
+        transform: translateY(0);
+        opacity: 1;
+    }
+}
+
+#mobile-menu.show {
+    display: block;
+    animation: slideDown 0.3s ease-out forwards;
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+    .game-card {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+    width: 8px;
+}
+
+::-webkit-scrollbar-track {
+    background: var(--secondary-color);
+}
+
+::-webkit-scrollbar-thumb {
+    background: var(--primary-color);
+}
+
+::-webkit-scrollbar-thumb:hover {
+    background: #cc0000;
+}
+
+/* Additional Brutalist Elements */
+.border-glitch {
+    position: relative;
+    overflow: hidden;
+}
+
+.border-glitch::before {
+    content: '';
+    position: absolute;
+    top: -2px;
+    left: -2px;
+    right: -2px;
+    bottom: -2px;
+    border: 2px solid var(--primary-color);
+    animation: borderGlitch 1s linear infinite;
+}
+
+@keyframes borderGlitch {
+    0% {
+        clip-path: inset(0 0 98% 0);
+    }
+    25% {
+        clip-path: inset(0 98% 0 0);
+    }
+    50% {
+        clip-path: inset(98% 0 0 0);
+    }
+    75% {
+        clip-path: inset(0 0 0 98%);
+    }
+    100% {
+        clip-path: inset(0 0 98% 0);
+    }
+}
